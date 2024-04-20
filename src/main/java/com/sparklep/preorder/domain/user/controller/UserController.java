@@ -19,6 +19,4 @@ public class UserController {
     public String signup(@RequestBody @Validated SignupRequestDto signupRequestDto) {
         return userService.signup(signupRequestDto);
     }
-
-    //   /login
 }

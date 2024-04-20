@@ -21,7 +21,6 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        log.info("getAuthorities");
         UserRoleEnum role = user.getRole();
         String authority = role.getAuthority();
 
@@ -35,37 +34,31 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getPassword() {
-        log.info("getPassword");
         return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        log.info("getUsername");
         return user.getUsername();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        log.info("isAccountNonExpired");
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        log.info("isAccountNonLocked");
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        log.info("isCredentialsNonExpired");
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-        log.info("isEnabled");
         return true;
     }
 }
