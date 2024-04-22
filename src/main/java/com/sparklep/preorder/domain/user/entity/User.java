@@ -17,9 +17,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", nullable = false)
-    private String username;
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -39,4 +36,8 @@ public class User {
     @Column(name = "role", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
+
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }
