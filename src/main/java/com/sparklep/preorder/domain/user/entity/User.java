@@ -1,6 +1,5 @@
 package com.sparklep.preorder.domain.user.entity;
 
-import com.sparklep.preorder.global.entity.TimeStamp;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,5 +38,10 @@ public class User {
 
     public void updatePassword(String newPassword) {
         this.password = newPassword;
+    }
+
+    public void updateProfile(String newAddress, String newPhoneNumber) {
+        this.address = newAddress;
+        this.phoneNumber = newPhoneNumber;
     }
 }
