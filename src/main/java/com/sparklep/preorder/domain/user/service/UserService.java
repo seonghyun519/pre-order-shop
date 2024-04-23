@@ -54,7 +54,7 @@ public class UserService {
         log.info("updatePasswordDto.getPassword() =====" + updatePasswordRequestDto.getPassword());
         log.info("updatePasswordDto.getNewPassword() =====" + updatePasswordRequestDto.getNewPassword());
         user = userRepository.findByEmail(user.getEmail()).orElseThrow(
-                () -> new IllegalArgumentException("유저 정보를 찾지 못하였습니다."));
+                () -> new NullPointerException("유저 정보를 찾지 못하였습니다."));
 
         log.info("boolean === " + passwordEncoder.matches(updatePasswordRequestDto.getPassword(), user.getPassword()));
         if (!passwordEncoder.matches(updatePasswordRequestDto.getPassword(), user.getPassword())) {
@@ -68,7 +68,7 @@ public class UserService {
     @Transactional
     public String updateProfile(UpdateProfileRequestDto updateProfileRequestDto, User user) {
         user = userRepository.findByEmail(user.getEmail()).orElseThrow(
-                () -> new IllegalArgumentException("유저 정보를 찾지 못하였습니다."));
+                () -> new NullPointerException("유저 정보를 찾지 못하였습니다."));
         String encodeAddress = encryptUtil.encrypt(updateProfileRequestDto.getAddress());
         String encodePhoneNumber = encryptUtil.encrypt(updateProfileRequestDto.getPhoneNumber());
 
@@ -78,7 +78,7 @@ public class UserService {
 
     public MyPageResponseDto getMyPage(User user) {
         user = userRepository.findByEmail(user.getEmail()).orElseThrow(
-                () -> new IllegalArgumentException("유저 정보를 찾지 못하였습니다."));
+                () -> new NullPointerException("유저 정보를 찾지 못하였습니다."));
         String email = user.getEmail();
         String decodeName = encryptUtil.decrypt(user.getName());
         String decodeAddress =encryptUtil.decrypt(user.getAddress());
