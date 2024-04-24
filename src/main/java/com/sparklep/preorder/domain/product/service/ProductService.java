@@ -4,6 +4,7 @@ import com.sparklep.preorder.domain.product.dto.ProductRequestDto;
 import com.sparklep.preorder.domain.product.dto.ProductResponseDto;
 import com.sparklep.preorder.domain.product.dto.ProductsResponseDto;
 import com.sparklep.preorder.domain.product.entity.Product;
+import com.sparklep.preorder.domain.product.entity.ProductStatusEnum;
 import com.sparklep.preorder.domain.product.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,7 @@ public class ProductService {
                 .description(productRequestDto.getDescription())
                 .stock(productRequestDto.getStock())
                 .image(productRequestDto.getImage())
+                .status(ProductStatusEnum.SELLING)
                 .build();
         productRepository.save(product);
     }

@@ -34,4 +34,8 @@ public class Product extends TimeStamp {
 
     @Column(name = "image")
     private String image;
+
+    @Column(name = "status", nullable = false)
+    @Enumerated(value = EnumType.STRING)
+    private ProductStatusEnum status;
 }
