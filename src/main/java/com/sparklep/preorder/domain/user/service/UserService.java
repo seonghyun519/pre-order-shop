@@ -7,6 +7,8 @@ import com.sparklep.preorder.domain.user.dto.UpdateProfileRequestDto;
 import com.sparklep.preorder.domain.user.entity.User;
 import com.sparklep.preorder.domain.user.entity.UserRoleEnum;
 import com.sparklep.preorder.domain.user.repository.UserRepository;
+import com.sparklep.preorder.domain.wishlist.entity.Wishlist;
+import com.sparklep.preorder.domain.wishlist.repository.WishlistRepository;
 import com.sparklep.preorder.global.util.EncryptUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final EncryptUtil encryptUtil;
+    private final WishlistRepository wishlistRepository;
 
     public String signup(SignupRequestDto signupRequestDto) {
         Optional<User> findUserEmail = userRepository.findByEmail(signupRequestDto.getEmail());
@@ -35,6 +38,8 @@ public class UserService {
         String encodeAddress = encryptUtil.encrypt(signupRequestDto.getAddress());
         String encodePhoneNumber = encryptUtil.encrypt(signupRequestDto.getPhoneNumber());
 
+        Wishlist wishlist = wishlistRepository.save(new Wishlist());
+
         User user = User.builder()
                 .email(userEmail)
                 .password(encodePassword)
@@ -42,6 +47,7 @@ public class UserService {
                 .address(encodeAddress)
                 .phoneNumber(encodePhoneNumber)
                 .role(UserRoleEnum.USER)
+                .wishlistId(wishlist.getId())
                 .build();
         userRepository.save(user);
 
@@ -76,6 +82,7 @@ public class UserService {
     return "updateProfile";
     }
 
+    @Transactional(readOnly = true)
     public MyPageResponseDto getMyPage(User user) {
         user = userRepository.findByEmail(user.getEmail()).orElseThrow(
                 () -> new NullPointerException("유저 정보를 찾지 못하였습니다."));
