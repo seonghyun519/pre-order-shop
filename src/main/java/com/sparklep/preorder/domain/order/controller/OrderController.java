@@ -21,7 +21,7 @@ public class OrderController {
         return orderService.getMyOrders(userDetails.getUser());
     }
     @PostMapping
-    public String addWishlist(@RequestBody List<OrderRequestDto> orderRequestDtoList, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+    public String createOrdersFromWishlist(@RequestBody List<OrderRequestDto> orderRequestDtoList, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return orderService.createOrdersFromWishlist(orderRequestDtoList, userDetails.getUser());
     }
     @DeleteMapping("/{ordersId}")
