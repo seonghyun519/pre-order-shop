@@ -16,6 +16,7 @@ public class WishlistResponseDto {
     int count;
     private LocalDateTime modifiedAt;
     String productTitle;
+    long totalPrice;
     String summary;
     ProductStatusEnum productStatusEnum;
 
@@ -26,6 +27,7 @@ public class WishlistResponseDto {
                 .count(wishlistProduct.getCount())
                 .modifiedAt(wishlistProduct.getModifiedAt())
                 .productTitle(product.getTitle())
+                .totalPrice(product.getPrice()*wishlistProduct.getCount())
                 .summary(product.getSummary())
                 .productStatusEnum(product.getStatus())
                 .build();

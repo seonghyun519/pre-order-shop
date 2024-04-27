@@ -38,4 +38,14 @@ public class Product extends TimeStamp {
     @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)
     private ProductStatusEnum status;
+
+    public void sellProduct(int count) {
+        stock -= count;
+    }
+    public void restockProduct(int count) {
+        stock += count;
+    }
+    public void updateProductStatus(ProductStatusEnum status) {
+        this.status = status;
+    }
 }

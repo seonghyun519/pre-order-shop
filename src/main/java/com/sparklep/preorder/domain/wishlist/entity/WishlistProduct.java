@@ -33,4 +33,7 @@ public class WishlistProduct extends TimeStamp {
     public void updateCount(int count) {
         this.count = count;
     }
+    public void setDeleted() {
+        this.isDeleted = true;
+    }
 }

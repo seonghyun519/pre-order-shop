@@ -1,6 +1,5 @@
 package com.sparklep.preorder.domain.wishlist.service;
 
-
 import com.sparklep.preorder.domain.product.entity.Product;
 import com.sparklep.preorder.domain.product.entity.ProductStatusEnum;
 import com.sparklep.preorder.domain.product.repository.ProductRepository;
@@ -59,6 +58,7 @@ public class WishlistService {
         }
         Optional<WishlistProduct> findWishlistProduct = wishlistProductRepository.findWishlistProductByWishlistIdAndProductNo(wishlist.getId(),product.getProductNo());
         WishlistProduct wishlistProduct;
+        //findWishlistProduct에 존재하고 삭제 여부 확인
         if (findWishlistProduct.isPresent() && !findWishlistProduct.get().isDeleted()){
             findWishlistProduct.get().updateCount(wishlistAddRequestDto.getCount()); //modifiedAt 변동 체크 필요
         } else {
@@ -76,7 +76,7 @@ public class WishlistService {
     public String updateWishlist(WishlistUpdateRequestDto wishlistUpdateRequestDto, User user) {
         WishlistProduct wishlistProduct = wishlistProductRepository.findById(wishlistUpdateRequestDto.getWishlistProductId()).orElseThrow(
                 () -> new NullPointerException("해당 상품을 장바구니에서 찾을 수 없습니다."));
-        Product product = productRepository.findById(wishlistUpdateRequestDto.getProductNo()).orElseThrow(
+        Product product = productRepository.findById(wishlistProduct.getProductNo()).orElseThrow(
                 ()-> new NullPointerException("해당 상품을 찾을 수 없습니다."));
         if (product.getStatus() != ProductStatusEnum.SELLING) {
             throw new IllegalArgumentException("해당 상품은 " + product.getStatus() + "입니다.");

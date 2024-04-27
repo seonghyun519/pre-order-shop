@@ -36,6 +36,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserRoleEnum role;
 
+    @Column(name = "wishlistId", nullable = false)
     private Long wishlistId;
 
     public void updatePassword(String newPassword) {
