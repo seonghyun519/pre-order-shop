@@ -41,7 +41,6 @@ public class WishlistService {
                 Product product = productRepository.findByProductNo(checkWishlistProduct.getProductNo()).get();
                 wishlistResponseDto.add(WishlistResponseDto.of(checkWishlistProduct, product));
             }
-
         }
         return wishlistResponseDto;
     }

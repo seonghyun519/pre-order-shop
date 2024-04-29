@@ -22,7 +22,6 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    //이메일 유니크 체크 요구사항에서 본것 같음
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
